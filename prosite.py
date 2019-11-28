@@ -47,7 +47,7 @@ for line in prositeFile:
     elif re.match("PA   ", line):
         currentPA = line.split()[1]
         if lastLineTag == "PA   ":
-           currentPA =  lastLinePA + currentPA
+            currentPA =  lastLinePA + currentPA
     else:
         if not 'currentPA' in globals():
             lastLineTag = line[:5]
@@ -110,9 +110,15 @@ for line in prositeFile:
                 refinedCurrentPAList.append(finalPA)
 
         currentDict[currentAC] = refinedCurrentPAList
+        del currentPA
+#save information from the present line for retrival while reading the next line
+# useful while dealing with long Prosite patterns spanning multiple lines
     lastLineTag = line[:5]
     if re.match("PA   ", line):
-        lastLinePA = line.split()[1]
+        if 'currentPA' in globals():
+            lastLinePA = currentPA
+        else:
+            lastLinePA = line.split()[1]
 
 for key in currentDict.keys():
     if len(currentDict[key]) != 0:
