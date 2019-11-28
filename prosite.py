@@ -117,4 +117,4 @@ for line in prositeFile:
 for key in currentDict.keys():
     if len(currentDict[key]) != 0:
         print(key,currentDict[key] )
-        outputFile.write(key + "\t" + ",".join(currentDict[key])+ "\n")
+        outputFile.write(key + "\t" + "\t&\t".join(currentDict[key])+ "\n")
